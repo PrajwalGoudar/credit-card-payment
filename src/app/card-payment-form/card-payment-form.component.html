@@ -1,0 +1,111 @@
+<div class="card paymentForm">
+<form [formGroup]="creditCardForm">
+  <div class="form-group">
+    <label for="creditCardNumber">Credit Card Number</label>
+    <input
+      id="creditCardNumber"
+      type="number"
+      class="form-control"
+      formControlName="creditCardNumber"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="
+      creditCardNumber?.invalid &&
+      (creditCardNumber?.dirty || creditCardNumber?.touched)
+    "
+  >
+    <div *ngIf="creditCardNumber?.errors?.required">
+      Card number is required
+    </div>
+    <div *ngIf="creditCardNumber?.errors?.isInValidCreditCard">
+      Credit card number is not valid
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="cardHolder">Card Holder</label>
+    <input
+      id="cardHolder"
+      type="text"
+      class="form-control"
+      formControlName="cardHolder"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="cardHolder?.invalid && (cardHolder?.dirty || cardHolder?.touched)"
+  >
+    <div *ngIf="cardHolder?.errors?.required">Card Holder is required</div>
+    <div *ngIf="cardHolder?.errors?.minlength">
+      Card Holder length should be minimum of
+      {{ cardHolder?.errors?.minlength.requiredLength }} characters
+    </div>
+    <div *ngIf="cardHolder?.errors?.maxlength">
+        Card Holder length should be maximum of
+        {{ cardHolder?.errors?.maxlength.requiredLength }} characters
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="expiryDate">Expiry Date</label>
+    <input
+    id="expiryDate"
+    type="date"
+    [min] = "getCurrentDate()"
+    class="form-control"
+    formControlName="expiryDate"
+  />
+  </div>
+  <div
+  class="alert alert-danger"
+  *ngIf="expiryDate?.invalid && (expiryDate?.dirty || expiryDate?.touched)"
+>
+  <div *ngIf="expiryDate?.errors?.required">Expiry Date is required</div>
+</div>
+<div>
+  <div class="form-group">
+    <label for="cvv">CVV (optional)</label>
+    <input
+      id="cvv"
+      type="number"
+      class="form-control"
+      formControlName="cvv"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="
+      cvv?.invalid &&
+      (cvv?.dirty || cvv?.touched)
+    "
+  >
+    <div *ngIf="cvv?.errors?.isCVVInValid">
+      CVV should be of 3 digits
+    </div>
+  </div>
+</div>
+<div>
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input
+      id="amount"
+      type="number"
+      class="form-control"
+      formControlName="amount"
+    />
+  </div>
+  <div
+    class="alert alert-danger"
+    *ngIf="
+      amount?.invalid &&
+      (amount?.dirty || amount?.touched)
+    "
+  >
+    <div *ngIf="amount?.errors?.isAmountInValid">
+      Entered amount is invalid
+    </div>
+  </div>
+</div>
+  <button (click)="postPayment()" class="btn btn-primary" type="submit">Pay</button>
+</form>
+</div>
