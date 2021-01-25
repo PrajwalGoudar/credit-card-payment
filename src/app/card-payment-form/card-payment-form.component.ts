@@ -1,3 +1,4 @@
+import { DateValidators } from './../common/validators/date.validators';
 import { AppState } from './../app.state';
 import { CardPayment } from './../models/card-payment.model';
 import { BadInput } from './../common/errors/bad-input';
@@ -23,7 +24,7 @@ export class CardPaymentFormComponent {
     {
       'creditCardNumber': new FormControl('', [Validators.required, CardnumberValidators.isInValidCreditCard]),
       'cardHolder': new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(40)]),
-      'expiryDate': new FormControl('', [Validators.required]),
+      'expiryDate': new FormControl('', [Validators.required, DateValidators.isPastDate]),
       'cvv': new FormControl('',[CVVValidators.isCVVInValid]),
       'amount': new FormControl('',[Validators.required, AmountValidators.isInValidAmount])
     }
