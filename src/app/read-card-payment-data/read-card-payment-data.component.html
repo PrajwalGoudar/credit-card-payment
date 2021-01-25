@@ -1,12 +1,16 @@
-<div *ngFor="let cardPayment of cardPayments | async; let i=index;">
-  <div *ngIf="i>0" class="card text-white bg-success mb-3" style="width: 24rem; margin: 20px;">
-    <div class="card-body">
-      <h5 class="card-title">{{cardPayment?.cardHolder}}</h5>
-      <h6 class="card-subtitle mb-2">Card No.: {{cardPayment?.creditCardNumber}}</h6>
-      <h3 class="card-title">
-       $ {{ cardPayment?.amount }}
-      </h3>
-      <p> Exp: {{cardPayment?.expirationDate}}  CVV: {{cardPayment?.cvv}}</p>
+<div class="card-columns" style="margin: 25px;">
+  <div *ngFor="let cardPayment of cardPayments | async; let i = index">
+    <div *ngIf="i > 0" class="card bg-success text-white mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ cardPayment?.cardHolder }}</h5>
+        <h6 class="card-subtitle mb-2">
+          Card No.: {{ cardPayment?.creditCardNumber }}
+        </h6>
+        <h3 class="card-title">$ {{ cardPayment?.amount }}</h3>
+        <p>
+          Exp: {{ cardPayment?.expirationDate }} CVV: {{ cardPayment?.cvv }}
+        </p>
+      </div>
     </div>
   </div>
 </div>
